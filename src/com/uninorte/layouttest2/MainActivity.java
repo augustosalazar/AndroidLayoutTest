@@ -13,11 +13,18 @@ import android.os.Build;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements RelativeLayoutFragment.Callback{
 
+	LinearLayoutFragment linearLayoutFragment;
+	TableLayoutFragment tableLayoutFragment;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        linearLayoutFragment = new LinearLayoutFragment();
+        tableLayoutFragment = new TableLayoutFragment();
+        
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
@@ -45,6 +52,24 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+	@Override
+	public void onLinerLayoutFragmentClick() {
+		getFragmentManager().beginTransaction()
+		.replace(R.id.container, linearLayoutFragment)
+		.addToBackStack("linearLayoutFragment").commit();
+		
+	}
+
+
+	@Override
+	public void onTableLayoutFragmentClick() {
+		getFragmentManager().beginTransaction()
+		.replace(R.id.container, tableLayoutFragment)
+		.addToBackStack("tableLayoutFragment").commit();
+		
+	}
 
 
 }
